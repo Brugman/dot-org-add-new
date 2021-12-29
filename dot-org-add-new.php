@@ -87,6 +87,11 @@ if ( !class_exists( 'DotOrgAddNew' ) )
          * Hooks.
          */
 
+        public function hook_remove_plugins_add_new()
+        {
+            remove_submenu_page( 'plugins.php', 'plugin-install.php' );
+        }
+
         public function hook_register_plugins_add_new()
         {
             add_plugins_page(
@@ -105,6 +110,8 @@ if ( !class_exists( 'DotOrgAddNew' ) )
 
         public function register_hooks()
         {
+            // remove plugins add new
+            add_action( 'admin_menu', [ $this, 'hook_remove_plugins_add_new' ] );
             // register plugins add new
             add_action( 'admin_menu', [ $this, 'hook_register_plugins_add_new' ] );
         }
